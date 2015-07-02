@@ -1,0 +1,21 @@
+{
+  "name": "flexible-signature-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ChrisAntaki/flexible-signature-db.git"
+  },
+  "author": "",
+  "license": "AGPL",
+  "dependencies": {
+    "express": "^4.13.0",
+    "multiparty": "^4.1.2",
+    "mysql": "^2.7.0",
+    "sequelize": "^3.3.2"
+  }
+}
