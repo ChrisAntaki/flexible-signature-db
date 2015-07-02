@@ -10,6 +10,7 @@ var Signature = sequelize.define('signature', {
     name: Sequelize.STRING,
     optedIn: Sequelize.BOOLEAN,
     source: Sequelize.STRING,
+    userAgent: Sequelize.STRING,
     zip: Sequelize.STRING,
 });
 
@@ -42,6 +43,7 @@ app.post('/sign', function(req, res) {
             name: fields.name ? fields.name[0].trim() : null,
             optedIn: fields.optedIn ? fields.optedIn[0] : false,
             source: fields.source ? fields.source[0].trim() : null,
+            userAgent: fields.userAgent ? fields.userAgent[0].trim() : null,
             zip: fields.zip ? fields.zip[0].trim() : null,
         }).then(function() {
             res.send({ success: true });
