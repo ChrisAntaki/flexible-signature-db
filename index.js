@@ -52,3 +52,38 @@ app.post('/sign', function(req, res) {
         });
     });
 });
+
+// Authorization required
+
+var auth = require('basic-auth');
+app.use(function(req, res, next) {
+    var user = auth(req);
+
+    if (
+        user === undefined
+        ||
+        user['name'] !== process.env.ADMIN_USER
+        ||
+        user['pass'] !== process.env.ADMIN_PASS
+    ) {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="Who are you?"');
+        res.end('Unauthorized');
+    } else {
+        next();
+    }
+});
+
+app.get('/api/counts-grouped-by-source/:campaign', function(req, res) {
+    Signature.count({
+        attributes: ['source'],
+        group: 'source',
+        where: {
+            campaign: req.params.campaign,
+        },
+    }).then(function(counts) {
+        res.json(counts);
+    }).catch(function() {
+        res.send(500);
+    });
+});
